@@ -14,7 +14,7 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   JobOrder.init({
-    name: DataTypes.STRING
+    JoNumber: DataTypes.STRING
   }, {
     sequelize,
     modelName: 'JobOrder',
