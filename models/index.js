@@ -35,4 +35,7 @@ Object.keys(db).forEach(modelName => {
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;
 
+// const {model} = db.sequelize 
+// console.log('=============>22222', model , db.JobOrder.findAll())
+
 module.exports = db;

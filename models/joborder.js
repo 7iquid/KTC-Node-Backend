@@ -14,10 +14,15 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   JobOrder.init({
-    JoNumber: DataTypes.STRING
+    JoNumber: {
+      type: DataTypes.STRING,
+      allowNull: false
+    }
   }, {
     sequelize,
     modelName: 'JobOrder',
   });
   return JobOrder;
 };
+
+// console.log('=============>33333' )
