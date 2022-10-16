@@ -1,5 +1,20 @@
 extends layout
 
+
 block content
-  h1= title
-  p Welcome to #{title}
+  h1 Welcome to my API
+  #container.container
+    h3 End Point:
+    a(href='/')  / 
+    br
+    a(href='/api')  /api
+    br
+    h2  Data Structure
+    p #{datako}
+    
+  footer.fixed-bottom
+    p Author: Tavie Legasto
+    p Contact No.: +639310158517
+    p
+      a(href='mailto:taviefalcon@gmail.com') taviefalcon@gmail.com
+

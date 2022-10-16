@@ -6,8 +6,17 @@ const JobOrderRepository = require('../models/Controller/task.repository');
 
 
 /* GET home page. */
+
+
+
 router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express' });
+
+  db.JobOrder.findAll()
+    .then(function(data){
+        res.render('index', { page: req.path,datako: JSON.stringify({ data }, null, 3) } );
+    }).catch(function(error){
+        res.render('index', { datako: JSON.stringify({ data }, null, 3) } );
+    })
 });
 
 
