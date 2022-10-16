@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "nodemon DevMode http://localhost:3000/",
-    "start": "node ./bin/www"
+    "start": "node welcome to my API"
   },
   "dependencies": {
     "cookie-parser": "~1.4.4",
