@@ -1,13 +1,13 @@
 
 
-class JobOrderRepository {
+class DataParser {
 
     constructor() {
         this.db = require('../index');
  
     }
  
-    async getJobOrder() {
+    async getParser() {
         
         try {
             const JobOrder = await this.db.JobOrder.findAll();
@@ -19,7 +19,7 @@ class JobOrderRepository {
         }
     }
 
-    async createJobOrder(task) {
+    async createParser(task) {
         let data = {};
         try {
             task.createdate = new Date().toISOString();
@@ -30,7 +30,7 @@ class JobOrderRepository {
         return data;
     }
 
-    async updateJobOrder(task) {
+    async updateParser(task) {
         let data = {};
         try {
             task.updateddate = new Date().toISOString();
@@ -45,7 +45,7 @@ class JobOrderRepository {
         return data;
     }
 
-    async deleteJobOrder(taskId) {
+    async deleteParser(taskId) {
         let data = {};
         try {
             data = await this.db.JobOrder.destroy({
@@ -62,4 +62,4 @@ class JobOrderRepository {
 
 }
 
-module.exports = new JobOrderRepository();
+module.exports = new DataParser();

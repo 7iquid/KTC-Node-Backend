@@ -8,10 +8,11 @@
   },
   "test": {
     "username": "postgres",
-    "password": "2222222",
-    "database": "postgres",
-    "host": "127.0.0.1",
-    "dialect": "postgres"
+    "password": "xK47z9Q22rRzpNJsIvs3",
+    "database": "railway",
+    "host": "containers-us-west-77.railway.app",
+    "dialect": "postgres",
+    "port": "6404"
   },
   "production": {
     "username": "postgres",

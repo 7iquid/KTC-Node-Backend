@@ -2,12 +2,11 @@ var express = require('express');
 var router = express.Router();
 // var joborder       = require('.././models').joborder;
 const db = require('.././models/index');
-const JobOrderRepository = require('../models/Controller/task.repository');
-
+// const fileUpload = require('express-fileupload');
 
 /* GET home page. */
 
-
+// router.use(fileUpload());
 
 router.get('/', function(req, res, next) {
 
@@ -15,7 +14,7 @@ router.get('/', function(req, res, next) {
     .then(function(data){
         res.render('index', { page: req.path,datako: JSON.stringify({ data }, null, 3) } );
     }).catch(function(error){
-        res.render('index', { datako: JSON.stringify({ data }, null, 3) } );
+        res.render('index', { datako: JSON.stringify({ error }, null, 3) } );
     })
 });
 
@@ -44,18 +43,13 @@ router.post('/api', function(req, res, next) {
 
 });
 
-// router.delete('/api/:id', function(req, res, next) {
 
-//   JobOrderRepository
-//   db.JobOrder.create(req.body)
-//     .then(function(data){
-//         res.setHeader('Content-Type', 'application/json');
-//         res.end(JSON.stringify({ data }, null, 3));
-//     }).catch(function(error){
-//         res.json({er:error});
-//     })
-
-// });
+// test file upload
+router.post('/upload', function(req, res) {
+    const {name, data} = req.files.file;
+    console.log('req>>>>>>>>>', name)
+    res.sendStatus(202);
+});
 
 
 module.exports = router;
