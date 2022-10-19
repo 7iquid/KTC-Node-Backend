@@ -17,7 +17,8 @@ module.exports = (sequelize, DataTypes) => {
     JoNumber: {
       type: DataTypes.STRING,
       allowNull: false
-    }
+    },
+
   }, {
     sequelize,
     modelName: 'JobOrder',
