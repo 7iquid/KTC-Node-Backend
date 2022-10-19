@@ -45,11 +45,57 @@ router.post('/api', function(req, res, next) {
 
 
 // test file upload
-router.post('/upload', function(req, res) {
-    const {name, data} = req.files.file;
-    console.log('req>>>>>>>>>', name)
-    res.sendStatus(202);
-});
+// router.post('/upload', function(req, res) {
+//      if (Object.keys(req.files.file).length == 0) {
+//       return res.status(400).send('No files were uploaded.');
+//      }
 
+//      let uploadFile = req.files.file;
+
+//      uploadFile.mv(fileDir, function(err) {
+//       if (err)
+//        return res.status(500).send(err);
+
+//       res.send('File uploaded!');
+//      });
+
+
+
+//  //    let sampleFile;
+//  //    let uploadPath;
+//  //    const {name, data} = req.files.file;
+    
+//  //    sampleFile = req.files.file
+//  //    console.log('=======>>', sampleFile.name)
+//  //    // uploadPath = __dirname + '/uploads/' + sampleFile.name;    
+//  //    console.log('req>>>>>>>>>', sampleFile.name)
+
+
+//  // sampleFile.mv(`${__dirname}/upload/${sampleFile.name}`, err => {
+//  //  if (err) {
+//  //   return res.status(500).send(err);
+//  //  }
+
+//  //  res.json({ file: `public/${sampleFile.name}` });
+//  //  console.log(res.json);
+//  // });
+
+
+//   // res.sendStatus(201)
+// });
+
+
+router.post('/upload', (req, res) => {
+  if(!req.files) return res.status(400).send ("No files were uploaded!!");
+
+  const filesfile = req.files.file;
+  const uploadTo = `uploads/media/${filesfile.name}`;
+
+  filesfile.mv(uploadTo, (err) => {
+    if(err) return res.status(500).send(err);
+
+    res.send(`File uploaded to <a href="${uploadTo}" >${uploadTo}</a>`);
+  });
+})
 
 module.exports = router;
