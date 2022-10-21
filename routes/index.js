@@ -31,8 +31,6 @@ router.delete('/api/author/:authorId',  authorControl.delete);
 // Image EndPoint
 router.post('/api/image',  imageControl.create);
 router.get('/api/image',  imageControl.fetchAll);
-router.get('/api/image/:imageId',  imageControl.fetchOne);
-router.put('/api/image/:imageId',  imageControl.update);
 router.delete('/api/image/:imageId',  imageControl.delete);
 
 

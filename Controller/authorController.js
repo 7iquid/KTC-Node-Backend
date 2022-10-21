@@ -1,5 +1,5 @@
 const models = require( '../models');
-const path = require('path');
+
 const { Authors , Imagefiles} = models;
 
 const authorControl = {
@@ -18,8 +18,9 @@ const authorControl = {
 
   async fetchAll({ body,params }, res, next) {
     try {
-
-      console.log('<>>>>>>>>>>',path)
+      // const {author} ={body}
+      // if (!author) { return res.status(400).send({ error: {body:{author:"undifine"}} }); }
+      // const id = await Authors.findOne({where:{author:author}})
       const myAuthors = await Authors.findAll({
         include: [{
           model: Imagefiles,

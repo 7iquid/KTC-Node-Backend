@@ -2,29 +2,32 @@ const models = require( '../models');
 const path = require('path');
 const { Imagefiles, Authors } = models;
 
+
 const imageControl = {
-  async create({ body, files }, res, next) {
-      const filesfile = files.file
-      const {author} = body
+  async create(req, res, next) {
+      const filesfile = req.files.file
+      const {author} = req.body
+      const url = req.headers.host + '/';
       const id = await Authors.findOne({where:{author:author}})
+      const saveDIR=`${url}uploads/media/${filesfile.name}`
       const uploadTo = `uploads/media/${filesfile.name}`;
      
       const DataStructure={
         "filename": filesfile.name ,
-        "filelocation": uploadTo,
+        "filelocation": saveDIR,
         "authorId": id.id
       }
 
       const image = await Imagefiles.create(DataStructure);
-            // files.file.mv(uploadTo)
-      files.file.mv(uploadTo, (err) => {
+
+      req.files.file.mv(uploadTo, (err) => {
       if(err){ return res.status(500).send(err)}; });
       
       res.status(201).send({image});
       
   },
 
-  async fetchAll({ decoded }, res, next) {
+  async fetchAll(req, res, next) {
     try {
       const myimagefiles = await Imagefiles.findAll();
       return res.status(200).send(myimagefiles);
@@ -33,49 +36,29 @@ const imageControl = {
     }
   },
 
-  async fetchOne({ params, decoded }, res, next) {
+  async fetchOne({ params }, res, next) {
     try {
-      const myTodo = await Todo.findOne({
-        where: { id: params.todoId, userId: decoded.userId },
-        include: [{
-          model: TodoItem,
-          as: 'todoItems'
-        }],
+      const myImage = await Imagefiles.findOne({
+        where: { id: params.imageId },
       });
-      if (!myTodo) {
-        return res.status(404).send({ error: 'Todo not found' });
+      if (!myImage) {
+        return res.status(404).send({ error: 'Image not found' });
       }
-      return res.status(200).send(myTodo);
+      return res.status(200).send(myImage);
     } catch (e) {
       return next(new Error(e));
     }
   },
 
-  async update({ body, decoded, params }, res, next) {
-    try {
-      const todo = await Todo.findOne({ where: { id: params.todoId, userId: decoded.userId } });
-      if (!todo) {
-        return res.status(400).send({ error: 'Wrong todo id' });
-      }
-      const updatedTodo = await Todo.update({ title: body.title || todo.title },
-        {
-          where: { id: todo.id },
-          returning: true,
-          plain: true
-        },);
-      return res.status(200).send(updatedTodo[1]);
-    } catch (e) {
-      return next(new Error(e));
-    }
-  },
+  
 
-  async delete({ params, decoded }, res, next) {
+  async delete({ params }, res, next) {
     try {
-      const todo = await Todo.findOne({ where: { id: params.todoId, userId: decoded.userId } });
-      if (!todo) {
+      const image = await Imagefiles.findOne({ where: { id: params.imageId} });
+      if (!image) {
         return res.status(400).send({ error: 'Wrong todo id' });
       }
-      await todo.destroy();
+      await image.destroy();
       return res.status(200).send({});
     } catch (e) {
       return next(new Error(e));
