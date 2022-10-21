@@ -5,19 +5,21 @@ const db = require('.././models/index');
 // const fileUpload = require('express-fileupload');
 var path = require('path');
 /* GET home page. */
-
+const JsonFind = require("json-find");
 // router.use(fileUpload());
+
+const authorControl = require('.././Controller/authorController.js')
+const imageControl = require('.././Controller/imageController.js')
 
 router.get('/', function(req, res, next) {
 
-  db.blogs.findAll()
+  db.Authors.findAll()
     .then(function(data){
         res.render('index', { page: req.path,datako: JSON.stringify({ data }, null, 3) } );
     }).catch(function(error){
         res.render('index', { datako: JSON.stringify({ error }, null, 3) } );
     })
 });
-
 
 // Author EndPoint
 router.post('/api/author',  authorControl.create);
@@ -33,18 +35,6 @@ router.get('/api/image/:imageId',  imageControl.fetchOne);
 router.put('/api/image/:imageId',  imageControl.update);
 router.delete('/api/image/:imageId',  imageControl.delete);
 
-
-        // await console.log(project.dataValues)
-        // filesfile.push({"imageId": body.author })
-
-        // path.join(__dirname,'..', 'uploads')
-        // db.imagefiles.create(req.files.file)
-        // let {author} = req.body
-
-       // const filesfile = req.files.file;
-        // console.log(body, filesfile)
-        
-        // console.log(req.files.file)
 
 // router.route('/api')
 //     .get(function(req, res, next) {
@@ -74,27 +64,27 @@ router.delete('/api/image/:imageId',  imageControl.delete);
 
 
 
-router.post('/upload', (req, res) => {
-    if(!req.files) return res.status(400).send ("No files were uploaded!!");
+// router.post('/upload', (req, res) => {
+//     if(!req.files) return res.status(400).send ("No files were uploaded!!");
 
-    const filesfile = req.files.file;
-    const uploadTo = `uploads/media/${filesfile.name}`;
+//     const filesfile = req.files.file;
+//     const uploadTo = `uploads/media/${filesfile.name}`;
 
-    filesfile.mv(uploadTo, (err) => {
-      if(err) return res.status(500).send(err);
+//     filesfile.mv(uploadTo, (err) => {
+//       if(err) return res.status(500).send(err);
 
-    res.send(`File uploaded to <a href="${uploadTo}" >${uploadTo}</a>`);
-  });
-})
+//     res.send(`File uploaded to <a href="${uploadTo}" >${uploadTo}</a>`);
+//   });
+// })
 
-router.get('/upload', (req, res) => {
-    // res.sendFile(__dirname + "../uploads/media/abstergo.png" );
-    var options = {
-        root: path.join(__dirname,'..', 'uploads')
-    };
-    var fileName = 'abstergo.png';
-    res.sendFile(fileName, options);
+// router.get('/upload', (req, res) => {
+//     // res.sendFile(__dirname + "../uploads/media/abstergo.png" );
+//     var options = {
+//         root: path.join(__dirname,'..', 'uploads')
+//     };
+//     var fileName = 'abstergo.png';
+//     res.sendFile(fileName, options);
 
-})
+// })
 
 module.exports = router;

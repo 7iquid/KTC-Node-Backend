@@ -11,10 +11,10 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      // Authors.hasMany(models.imagefiles,{
-      //   as:'imagefiles',
-      //   foreignKey: 'AuthorsId',
-      // });
+      Authors.hasMany(models.Imagefiles,{
+        as:'image',
+        foreignKey: 'authorId',
+      });
     }
   }
   Authors.init({

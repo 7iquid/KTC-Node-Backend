@@ -1,29 +1,42 @@
 const models = require( '../models');
-
-const { imagefiles } = models;
+const path = require('path');
+const { Imagefiles, Authors } = models;
 
 const imageControl = {
-  async create({ body, decoded }, res, next) {
-    try {
-      const { filename } = body;
-      const { userId } = decoded;
-      const todo = await Todo.create({ title, userId });
-      return res.status(201).send(todo);
-    } catch (e) {
-      return next(new Error(e));
-    }
+  async create({ body, files }, res, next) {
+      const filesfile = files.file
+      const {author} = body
+      const id = await Authors.findOne({where:{author:author}})
+      const uploadTo = `uploads/media/${filesfile.name}`;
+     
+      const DataStructure={
+        "filename": filesfile.name ,
+        "filelocation": uploadTo,
+        "authorId": id.id
+      }
+      // new Date().getTime()
+      // filesfile.filelocation = uploadTo
+      // filesfile.authorId = 4
+      // files.file.mv(uploadTo)
+      // await files.file.mv(uploadTo, (err) => {
+      //     if(err) return res.status(500).send(err);
+
+      //   return 202;
+      // });
+
+       // console.log(DataStructure)
+      // console.log(typeof(DataStructure),'<<<<<<<<<<<<',typeof(body))
+      // console.log(body,'<<<<<<<<<<<<')
+      // const { filename } = body;
+      // const { userId } = decoded;
+      const image = await Imagefiles.create(DataStructure);
+      res.status(201).send({testing:123});
   },
 
   async fetchAll({ decoded }, res, next) {
     try {
-      const myTodos = await Todo.findAll({
-        where: { userId: decoded.userId },
-        include: [{
-          model: TodoItem,
-          as: 'todoItems'
-        }],
-      });
-      return res.status(200).send(myTodos);
+      const myimagefiles = await Imagefiles.findAll();
+      return res.status(200).send(myimagefiles);
     } catch (e) {
       return next(new Error(e));
     }
