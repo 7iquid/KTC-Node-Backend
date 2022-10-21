@@ -2,14 +2,11 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('imagefiles', {
+    await queryInterface.createTable('Imagefiles', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
-        type: Sequelize.INTEGER
-      },
-      id: {
         type: Sequelize.INTEGER
       },
       filename: {
@@ -17,6 +14,14 @@ module.exports = {
       },
       filelocation: {
         type: Sequelize.STRING
+      },
+      authorId:{
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        references: {
+          model: 'Authors',
+          key: 'id'
+        }
       },
       createdAt: {
         allowNull: false,
@@ -26,12 +31,9 @@ module.exports = {
         allowNull: false,
         type: Sequelize.DATE
       },
-      imageId:{
-        type:Sequelize.INTEGER
-      },
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('imagefiles');
+    await queryInterface.dropTable('Imagefiles');
   }
 };
