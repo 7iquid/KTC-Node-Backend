@@ -64,7 +64,7 @@ router.delete('/api/image/:imageId',  imageControl.delete);
 
 
 
-// router.post('/upload', (req, res) => {
+// router.post('/media/:imageId', (req, res) => {
 //     if(!req.files) return res.status(400).send ("No files were uploaded!!");
 
 //     const filesfile = req.files.file;
@@ -77,14 +77,14 @@ router.delete('/api/image/:imageId',  imageControl.delete);
 //   });
 // })
 
-// router.get('/upload', (req, res) => {
-//     // res.sendFile(__dirname + "../uploads/media/abstergo.png" );
-//     var options = {
-//         root: path.join(__dirname,'..', 'uploads')
-//     };
-//     var fileName = 'abstergo.png';
-//     res.sendFile(fileName, options);
+router.get('/uploads/media/:filename', ({params}, res) => {
 
-// })
+    var options = {
+        root: path.join(__dirname,'..', 'uploads/media/')
+    };
+
+    res.sendFile(params.filename, options);
+
+})
 
 module.exports = router;

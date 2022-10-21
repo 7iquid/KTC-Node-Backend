@@ -14,23 +14,14 @@ const imageControl = {
         "filelocation": uploadTo,
         "authorId": id.id
       }
-      // new Date().getTime()
-      // filesfile.filelocation = uploadTo
-      // filesfile.authorId = 4
-      // files.file.mv(uploadTo)
-      // await files.file.mv(uploadTo, (err) => {
-      //     if(err) return res.status(500).send(err);
 
-      //   return 202;
-      // });
-
-       // console.log(DataStructure)
-      // console.log(typeof(DataStructure),'<<<<<<<<<<<<',typeof(body))
-      // console.log(body,'<<<<<<<<<<<<')
-      // const { filename } = body;
-      // const { userId } = decoded;
       const image = await Imagefiles.create(DataStructure);
-      res.status(201).send({testing:123});
+            // files.file.mv(uploadTo)
+      files.file.mv(uploadTo, (err) => {
+      if(err){ return res.status(500).send(err)}; });
+      
+      res.status(201).send({image});
+      
   },
 
   async fetchAll({ decoded }, res, next) {
