@@ -16,7 +16,8 @@ router.get('/', function(req, res, next) {
     let test1 = {
         "NodeEnv": process.env.NODE_ENV === true,
         "DB_HOST": process.env.DB_HOST , 
-        "DateNow": new Date() 
+        "DateNow": new Date(),
+        "testing": "loaded " 
     }
   db.Authors.findAll()
     .then(function(data){
