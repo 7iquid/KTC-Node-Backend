@@ -13,14 +13,16 @@ const imageControl = require('.././Controller/imageController.js')
 
 router.get('/', function(req, res, next) {
     // console.log(process.env.NODE_ENV, "<<<<<<")
-    let test1 = process.env.NODE_ENV+"____" + process.env.DB_HOST +"_____________<"+ new Date()
-
-
+    let test1 = {
+        "NodeEnv": process.env.NODE_ENV === true,
+        "DB_HOST": process.env.DB_HOST , 
+        "DateNow": new Date() 
+    }
   db.Authors.findAll()
     .then(function(data){
         res.render('index', { 
             page: req.path,datako: JSON.stringify({ data }, null, 3), 
-            debug: test1
+            debug: JSON.stringify(test1)
         } );
     
     }).catch(function(error){
