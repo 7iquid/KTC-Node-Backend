@@ -13,7 +13,10 @@ const imageControl = require('.././Controller/imageController.js')
 
 router.get('/', function(req, res, next) {
     // console.log(process.env.NODE_ENV, "<<<<<<")
-    const test1 = process.env.NODE_ENV +"_____________<"+ new Date()
+    let test1 = process.env.NODE_ENV +"_____________<"+ new Date()
+    if(process.env.NODE_ENV){
+        test1 = process.env.DB_HOST
+    }
 
   db.Authors.findAll()
     .then(function(data){
