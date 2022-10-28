@@ -10,6 +10,7 @@ const JsonFind = require("json-find");
 
 const authorControl = require('.././Controller/authorController.js')
 const imageControl = require('.././Controller/imageController.js')
+const emailControl = require('.././Controller/emailController.js')
 
 router.get('/', function(req, res, next) {
     // console.log(process.env.NODE_ENV, "<<<<<<")
@@ -42,6 +43,10 @@ router.delete('/api/author/:authorId',  authorControl.delete);
 router.post('/api/image',  imageControl.create);
 router.get('/api/image',  imageControl.fetchAll);
 router.delete('/api/image/:imageId',  imageControl.delete);
+
+// Email EndPoint
+router.post('/api/email',  emailControl.create);
+
 
 
 // router.route('/api')
