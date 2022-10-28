@@ -12,7 +12,7 @@ const authorControl = require('.././Controller/authorController.js')
 const imageControl = require('.././Controller/imageController.js')
 
 router.get('/', function(req, res, next) {
-
+    console.log(process.env.NODE_ENV, "<<<<<<")
   db.Authors.findAll()
     .then(function(data){
         res.render('index', { page: req.path,datako: JSON.stringify({ data }, null, 3) } );
