@@ -14,7 +14,7 @@ const imageControl = require('.././Controller/imageController.js')
 router.get('/', function(req, res, next) {
     // console.log(process.env.NODE_ENV, "<<<<<<")
     let test1 = {
-        "NodeEnv": process.env.NODE_ENV === true,
+        "NodeEnv": process.env.NODE_ENV || "undifined pre",
         "DB_HOST": process.env.DB_HOST , 
         "DateNow": new Date(),
         "testing": "loaded " 
