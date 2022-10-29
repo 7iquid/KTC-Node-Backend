@@ -1,43 +1,44 @@
 
-const EMAIL_USERNAME = "tavlegktc@gmail.com"
-const EMAIL_PASSWORD = "Liquid1985"
+const {mailOptions , transport} = require('./emailTemplate/mailerKo')
 
-
-
-const nodemailer = require('nodemailer');
-
-let transport = nodemailer.createTransport({
-   host: "smtp.gmail.com",
-   port: 465,
-   secure: true,
-   auth: {
-     user: EMAIL_USERNAME,
-     pass: EMAIL_PASSWORD
-   }
-});
 
 const emailControl = {
-  async create({ body,params }, res, next) {
+  async create({ body}, res, next) {
     try{
-      return res.status(201).send({body});
+      // const {email, name, message, } = body
+  
+      transport.sendMail(mailOptions(body), function(error, info){
+          if (error) {
+
+            return res.status(400).send({error: error})
+          } else {
+
+            return res.status(201).send({info: info.response});
+          }
+      }); 
+
+
+      // console.log(mailOptions(email) )
+      
+
     }catch(e){
       return next(new Error(e));
     }
 
   },
 
-  async fetchAll({ body,params }, res, next) {
-  },
+  // async fetchAll({ body,params }, res, next) {
+  // },
 
-  async fetchOne({ params }, res, next) {
-  },
+  // async fetchOne({ params }, res, next) {
+  // },
 
-  async update({ body,  params }, res, next) {
-  },
+  // async update({ body,  params }, res, next) {
+  // },
 
-  async delete({ params, decoded }, res, next) {
+  // async delete({ params, decoded }, res, next) {
 
-  }
+  // }
 };
 
 module.exports= emailControl;
