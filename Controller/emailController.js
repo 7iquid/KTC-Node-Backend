@@ -1,3 +1,21 @@
+
+const EMAIL_USERNAME = "tavlegktc@gmail.com"
+const EMAIL_PASSWORD = "Liquid1985"
+
+
+
+const nodemailer = require('nodemailer');
+
+let transport = nodemailer.createTransport({
+   host: "smtp.gmail.com",
+   port: 465,
+   secure: true,
+   auth: {
+     user: EMAIL_USERNAME,
+     pass: EMAIL_PASSWORD
+   }
+});
+
 const emailControl = {
   async create({ body,params }, res, next) {
     try{
