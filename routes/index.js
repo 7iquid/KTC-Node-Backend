@@ -12,10 +12,20 @@ const authorControl = require('.././Controller/authorController.js')
 const imageControl = require('.././Controller/imageController.js')
 
 router.get('/', function(req, res, next) {
-
+    // console.log(process.env.NODE_ENV, "<<<<<<")
+    let test1 = {
+        "NodeEnv": process.env.NODE_ENV || "undifined pre",
+        "DB_HOST": process.env.DB_HOST , 
+        "DateNow": new Date(),
+        "testing": "loaded " 
+    }
   db.Authors.findAll()
     .then(function(data){
-        res.render('index', { page: req.path,datako: JSON.stringify({ data }, null, 3) } );
+        res.render('index', { 
+            page: req.path,datako: JSON.stringify({ data }, null, 3), 
+            debug: JSON.stringify(test1)
+        } );
+    
     }).catch(function(error){
         res.render('index', { datako: JSON.stringify({ error }, null, 3) } );
     })
