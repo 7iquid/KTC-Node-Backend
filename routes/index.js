@@ -32,6 +32,22 @@ router.get('/', function(req, res, next) {
     })
 });
 
+router.get('/api', async function(req, res, next) {
+    // console.log(process.env.NODE_ENV, "<<<<<<")
+    try {
+    const myAuthors = await db.Authors.findAll({
+        include: [{
+          model: db.Imagefiles,
+          as: 'image'
+        }],
+      });;
+      res.setHeader('Content-Type', 'application/json');
+      return res.status(200).end(JSON.stringify({ myAuthors }, null, 3));
+    } catch (e) {
+      return next(new Error(e));
+    }
+});
+
 // Author EndPoint
 router.post('/api/author',  authorControl.create);
 router.get('/api/author',  authorControl.fetchAll);
