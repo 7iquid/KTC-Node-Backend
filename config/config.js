@@ -6,7 +6,9 @@ module.exports =
     "database": "postgres",
     "host": "containers-us-west-52.railway.app",
     "dialect": "postgres",
-    "port": "6291"
+    "port": "6291",
+    "EMAIL_USERNAME":"tavlegktc@gmail.com",
+    "EMAIL_PASSWORD":"gsqdjhdwyoelcwkx"
   },
   "test": {
     "username": "postgres",
@@ -22,6 +24,8 @@ module.exports =
     "database": process.env.DB_NAME,
     "host":     process.env.DB_HOST,
     "dialect":  process.env.DB_DIALECT,
-    "port":     process.env.DB_PORT
+    "port":     process.env.DB_PORT,
+    "EMAIL_USERNAME":process.env.EMAIL_USERNAME,
+    "EMAIL_PASSWORD":process.env.EMAIL_PASSWORD
   }
 }
