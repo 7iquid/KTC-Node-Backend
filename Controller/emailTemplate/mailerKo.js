@@ -3,6 +3,48 @@ const nodemailer = require('nodemailer');
 const env = process.env.NODE_ENV || 'development';
 const config = require('../../config/config.js')[env];
 
+const smtpTransport = require('nodemailer-smtp-transport');
+const handlebars = require('handlebars');
+const { promisify } = require('util');
+const fs = require('fs');
+
+
+const readFile = promisify(fs.readFile);
+
+
+const HtmlToSend = async({name = "sir/mam"})=>{
+	try{
+    let html = await readFile('/path/to/file', 'utf8');
+    let template = handlebars.compile(html);
+    let data = {
+        username: name
+    };
+    let htmlToSend = template(data);
+   	return htmlToSend
+
+	}catch(error){return error}
+}
+
+// const sendMail = async () => {
+//     let html = await readFile('/path/to/file', 'utf8');
+//     let template = handlebars.compile(html);
+//     let data = {
+//         username: "Toto"
+//     };
+//     let htmlToSend = template(data);
+    
+//     let mailOptions = {
+//         from: 'from@toto.com',
+//         to : 'to@toto.com',
+//         subject : 'test',
+//         html : htmlToSend
+//     };
+//     smtpTransport.sendMail(mailOptions, (error, info) => {
+//         if (error) console.log(error);
+//     });
+// });
+
+
 const transport = nodemailer.createTransport({
   service: 'gmail',
   auth: {
@@ -74,4 +116,4 @@ const mailOptions = ({email, name, message}) => {
 //   }
 // }); 
 
-module.exports = {mailOptions , transport};
+module.exports = {mailOptions , transport , htmlToSend};
