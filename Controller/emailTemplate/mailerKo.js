@@ -15,7 +15,7 @@ const transport = nodemailer.createTransport({
 
 const mailOptions = ({email, name, message}) => {
 		const mailOptions = {
-			from: 'aasd@gmail.com',
+			from: config.EMAIL_USERNAME,
 			to: `taviefalcon@gmail.com, ${email}`, 
 			subject: 'Tavie Portfolio inquiry',
 			text: `From tamina thank you for subscibing ${message}`
@@ -25,7 +25,9 @@ const mailOptions = ({email, name, message}) => {
 
 // }
 
+// "Thank you for your inquiry. I will get back on you the soonest possible."
 
+// "Tavie"
 
 
 // transport.sendMail(mailOptions, function(error, info){
