@@ -14,11 +14,11 @@ const readFile = promisify(fs.readFile);
 
 const HtmlToSend = async({name,email, message})=>{
 	try{
-    let html = await readFile('Controller/emailTemplate/response.html', 'utf8');
+    let html = await readFile('Controller/emailTemplate/response.htm', 'utf8');
     let template = handlebars.compile(html);
     let data = {
         username: name+"," ||email+"," ,
-        // message : message
+        message : message,
     };
     let htmlToSend = template(data);
    	return htmlToSend
