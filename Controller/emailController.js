@@ -4,10 +4,13 @@ const {mailOptions , transport, HtmlToSend} = require('./emailTemplate/mailerKo'
 
 const emailControl = {
   async create({ body}, res, next) {
+    if (body.email || body.message){res.sendStatus(400).end({email:undefined,message:undefined})}
+
     try{
+      // data checkert
       // const {email, name, message, } = body
-      console.log(HtmlToSend(body))
-      transport.sendMail(mailOptions(body), function(error, info){
+      // console.log(HtmlToSend(body))
+      transport.sendMail(mailOptions(body, await HtmlToSend(body)), function(error, info){
           if (error) {
 
             return res.status(400).send({error: error})
