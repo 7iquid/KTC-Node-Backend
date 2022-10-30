@@ -4,10 +4,10 @@ const env = process.env.NODE_ENV || 'development';
 const config = require('../../config/config.js')[env];
 
 
+const smtpTransport = require('nodemailer-smtp-transport');
 const handlebars = require('handlebars');
 const { promisify } = require('util');
 const fs = require('fs');
-
 
 const readFile = promisify(fs.readFile);
 
@@ -18,7 +18,7 @@ const HtmlToSend = async({name,email, message})=>{
     let template = handlebars.compile(html);
     let data = {
         username: name+"," ||email+"," ,
-        message : message
+        // message : message
     };
     let htmlToSend = template(data);
    	return htmlToSend
