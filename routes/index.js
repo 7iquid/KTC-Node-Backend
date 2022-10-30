@@ -4,8 +4,9 @@ var router = express.Router();
 const db = require('.././models/index');
 // const fileUpload = require('express-fileupload');
 var path = require('path');
+// require('dotenv').config({ path: require('find-config')('.env') })
 /* GET home page. */
-const JsonFind = require("json-find");
+// const JsonFind = require("json-find");
 // router.use(fileUpload());
 
 const authorControl = require('.././Controller/authorController.js')
@@ -13,7 +14,7 @@ const imageControl = require('.././Controller/imageController.js')
 const emailControl = require('.././Controller/emailController.js')
 
 router.get('/', function(req, res, next) {
-    // console.log(process.env.NODE_ENV, "<<<<<<")
+    // console.log(process.env.NODE_ENV,process.env.DB_USER, "<<<<<<")
     let test1 = {
         "NodeEnv": process.env.NODE_ENV || "undifined pre",
         "DB_HOST": process.env.DB_HOST , 
@@ -24,7 +25,7 @@ router.get('/', function(req, res, next) {
     .then(function(data){
         res.render('index', { 
             page: req.path,datako: JSON.stringify({ data }, null, 3), 
-            debug: JSON.stringify(test1)
+            testdebug: JSON.stringify(test1)
         } );
     
     }).catch(function(error){
