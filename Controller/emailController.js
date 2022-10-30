@@ -1,12 +1,12 @@
 
-const {mailOptions , transport, htmlToSend} = require('./emailTemplate/mailerKo')
+const {mailOptions , transport, HtmlToSend} = require('./emailTemplate/mailerKo')
 
 
 const emailControl = {
   async create({ body}, res, next) {
     try{
       // const {email, name, message, } = body
-      console.log(htmlToSend(body))
+      console.log(HtmlToSend(body))
       transport.sendMail(mailOptions(body), function(error, info){
           if (error) {
 

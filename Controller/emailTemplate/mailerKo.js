@@ -116,4 +116,4 @@ const mailOptions = ({email, name, message}) => {
 //   }
 // }); 
 
-module.exports = {mailOptions , transport , htmlToSend};
+module.exports = {mailOptions , transport , HtmlToSend};
