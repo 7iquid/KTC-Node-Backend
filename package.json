@@ -5,6 +5,7 @@
   "scripts": {
     "dev": "nodemon DevMode http://localhost:3000/",
     "start": "node ./bin/www",
+    "build": "node ./bin/www build src",
     "migrate:all": "sequelize db:migrate:undo:all && sequelize db:migrate"
   },
   "dependencies": {
