@@ -4,11 +4,11 @@ module.exports =
 {
   "development": {
     "username":  "postgres",
-    "password":  "GFIBKE6zWZVdn9QINNowZBZO9eGxBvJf",
-    "database":  "tamina",
-    "host":     "dpg-cel0nmpa6gdkdn1aqts0-a.render.app",
+    "password":  "PW6acPtyfNQokcqAeBcH",
+    "database":  "railway",
+    "host":     "containers-us-west-77.railway.app",
     "dialect":  "postgres",
-    "port":      "5432",
+    "port":      "6404",
     "EMIL_USERNAME": "tavlegktc@gmail.com",
     "EMIL_PASSWORD": "gsqdjhdwyoelcwkx"
   },
